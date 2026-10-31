@@ -10,3 +10,5 @@ Forms, drawn in light. A fixed grid of custom glyphs uses projected face shading
 The acubic-glyph-hero skill uses the portable Agent Skills format. Compatible agents can load the skill folder; other coding agents can read SKILL.md and its linked resources. Optional OpenAI UI metadata is not required. The JavaScript starter works without an AI agent or a build step.
 
 The ACubic logo is the starter's example. The showcase also includes a cube, torus, sphere, and a drawing tool for extruded custom outlines.
+
+Install from your project with `npx skills add achourahmed/glyphfield` (Node.js 22.20+), then choose your coding agent. Add `-g` for installation across projects.

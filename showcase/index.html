@@ -37,11 +37,13 @@
 <dialog id="skill-dialog" aria-labelledby="skill-title">
  <div class="dialog-heading"><h2 id="skill-title">Make your own.</h2><button id="skill-close" aria-label="Close skill details">×</button></div>
  <p>The glyphs, motion, and lighting—as a portable agent skill.</p>
- <a class="download" href="./downloads/acubic-glyph-hero.zip" download>Download skill <span aria-hidden="true">↓</span></a>
- <p class="install">Add the folder to your agent’s skills directory, or ask it to read <code>SKILL.md</code>. Then try:</p>
+ <p class="install">Run in your project, then choose your agent.</p>
+ <div class="prompt install-command"><code id="install-command">npx skills add achourahmed/glyphfield</code><button id="copy-install" aria-label="Copy install command">Copy</button></div>
+ <p class="install-note">Requires Node.js 22.20+. Add <code>-g</code> to install across projects.</p>
+ <p class="install">Then ask your agent:</p>
  <div class="prompt"><code id="prompt">Use the acubic-glyph-hero skill to create a dimensional hero from custom shapes.</code><button id="copy" aria-label="Copy example prompt">Copy</button></div>
  <p class="copy-status" id="copy-status" role="status"></p>
- <div class="resources"><a href="./downloads/hero-starter.zip" download>Standalone starter ↗</a><a href="https://github.com/achourahmed/glyphfield#use-the-skill">Install & source ↗</a></div>
+ <div class="resources"><a href="./downloads/acubic-glyph-hero.zip" download>Skill ZIP ↓</a><a href="./downloads/hero-starter.zip" download>Standalone starter ↗</a><a href="https://github.com/achourahmed/glyphfield#use-the-skill">Install & source ↗</a></div>
 </dialog>
 <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
  <div class="dialog-heading"><h2 id="settings-title" tabindex="-1">Display</h2><button id="settings-close" class="close" aria-label="Close display settings">×</button></div>

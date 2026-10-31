@@ -102,10 +102,12 @@ function theater(enabled){
 }
 theaterButton.addEventListener('click',()=>theater(!document.body.classList.contains('theater')));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!document.querySelector('dialog[open]')){theater(false);}});
-document.querySelector('#copy').addEventListener('click',async()=>{
- const text=document.querySelector('#prompt').textContent,status=document.querySelector('#copy-status');
- try{await navigator.clipboard.writeText(text);status.textContent='Prompt copied.';}catch{status.textContent='Select the prompt above to copy it.';}
-});
+for(const [button,source,label] of [['#copy','#prompt','Prompt'],['#copy-install','#install-command','Install command']]){
+ document.querySelector(button).addEventListener('click',async()=>{
+  const text=document.querySelector(source).textContent,status=document.querySelector('#copy-status');
+  try{await navigator.clipboard.writeText(text);status.textContent=label+' copied.';}catch{status.textContent='Select the '+label.toLowerCase()+' above to copy it.';}
+ });
+}
 window.addEventListener('pagehide',event=>{
  if(event.persisted)post({type:'visible',visible:false});
  else worker?.terminate();

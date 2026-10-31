@@ -10,6 +10,16 @@ Native Canvas2D, ES modules, and a worker. No 3D library or runtime package depe
 
 The skill follows the [Agent Skills format](https://agentskills.io/specification). It is not tied to one coding agent.
 
+Run from your project (Node.js 22.20+):
+
+```sh
+npx skills add achourahmed/glyphfield
+```
+
+Choose your coding agent in the installer. Add `-g` for installation across projects. See the [Skills CLI](https://github.com/vercel-labs/skills) for supported agents and options.
+
+For manual installation:
+
 1. Clone or download this repository.
 2. Copy the complete `skills/acubic-glyph-hero` folder into the skills directory supported by your agent. Consult that agent’s documentation for its discovery path.
 3. Ask: **Use the acubic-glyph-hero skill to create a dimensional hero from custom shapes.**

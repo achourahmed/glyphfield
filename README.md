@@ -52,3 +52,7 @@ Open an issue for an idea or submit a focused pull request with a before/after s
 ## Credits
 
 Created by [Ahmed Achour](https://ahmedachour.tech/) for [ACubic](https://acubic.dev/). The ACubic mark is a brand example, not a suggested identity for other projects. Geist fonts retain their bundled OFL license in `showcase/fonts/geist-LICENSE.txt`.
+
+## License
+
+Code and skill instructions are [MIT licensed](LICENSE). This does not grant rights to ACubic’s trademarks or imply endorsement. Replace the brand example for unrelated projects. The bundled Geist fonts use the SIL Open Font License.

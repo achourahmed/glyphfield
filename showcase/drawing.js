@@ -18,6 +18,7 @@ export function installDrawing({apply}){
  try{saved=JSON.parse(localStorage.getItem('glyphfield-drawing-v2')||localStorage.getItem('glyphfield-drawing-v1'));if(saved){saved.contours=saved.contours||[saved.points];extrudeContours(saved.contours,saved.depth);}}catch{saved=null;}
  const path=loop=>loop.length?'M'+loop.map(p=>`${(p[0]*400).toFixed(2)} ${(p[1]*400).toFixed(2)}`).join(' L'):'';
  function updateLabels(){
+  for(const el of document.querySelectorAll('#image-settings input,#image-settings select,#image-auto'))el.disabled=!image;
   for(const [key,el] of controls){const v=Number(el.value);$('draw-'+key+'-value').textContent=key==='speed'?(v/100).toFixed(2).replace(/0$/,'')+'×':v+(key==='yaw'||key==='tilt'?'°':'%');el.style.setProperty('--fill',(v-Number(el.min))/(Number(el.max)-Number(el.min))*100+'%');}
   for(const key of ['threshold','smoothing','cleanup']){const el=$('image-'+key);$('image-'+key+'-value').textContent=el.value+(key==='cleanup'?' px':'');el.style.setProperty('--fill',(Number(el.value)-Number(el.min))/(Number(el.max)-Number(el.min))*100+'%');}
  }
@@ -36,7 +37,7 @@ export function installDrawing({apply}){
   if(validate){try{mesh=extrudeContours(contours,Number($('draw-depth').value)/100);$('draw-create').disabled=false;say(`${contours.length} outline${contours.length===1?'':'s'} · ${contours.reduce((n,p)=>n+p.length,0)} points. Ready to create.`);}catch(error){mesh=null;$('draw-create').disabled=true;say(contours.length?error.message:'Start with a preset, a sketch, or an image.');}}
   dirty=true;
  }
- function setMode(next){mode=next;for(const key of ['freehand','corners','image'])$('mode-'+key).setAttribute('aria-pressed',String(key===mode));$('image-settings').hidden=mode!=='image';
+ function setMode(next){mode=next;dialog.dataset.mode=mode;for(const key of ['freehand','corners','image'])$('mode-'+key).setAttribute('aria-pressed',String(key===mode));$('image-settings').hidden=mode!=='image';
   $('draw-help').textContent=mode==='freehand'?'Drag to sketch. Each stroke replaces the outline.':mode==='corners'?'Drag points. Click an edge to insert; Delete removes the selected point.':'Adjust the silhouette below, then use Edit points to refine it.';render(false);
  }
  for(const key of ['freehand','corners','image'])$('mode-'+key).onclick=()=>setMode(key);

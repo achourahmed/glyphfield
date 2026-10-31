@@ -29,3 +29,6 @@ body.theater{overflow:hidden}body.theater>.header,body.theater>footer{display:no
 
 #draw-pad{width:min(100%,560px,calc(42svh * 4 / 3));margin-inline:auto}.draw-properties{position:sticky;top:0;align-self:start}.draw-workspace .draw-tools p{max-width:none;flex-basis:100%}.draw-workspace .draw-tools>div{margin-left:0}.draw-workspace .draw-tools{gap:6px}.draw-workspace .edit-actions{gap:2px 14px}.draw-workspace .presetbar{margin:10px 0}.draw-workspace .image-heading{margin-top:6px}.draw-workspace .image-controls{gap:6px 20px}.draw-workspace .image-toggles{margin-top:12px}
 @media(max-width:760px){#draw-pad{width:100%}.draw-properties{position:static}.draw-workspace .draw-tools>div{gap:12px}.image-controls{grid-template-columns:1fr 1fr}}
+
+#draw-dialog[data-mode=image] #draw-pad{width:min(100%,480px,calc(30svh * 4 / 3))}#draw-dialog[data-mode=image] .draw-tools,#draw-dialog[data-mode=image] .edit-actions{display:none}#draw-dialog[data-mode=image] #image-settings{margin-top:14px}#image-settings input:disabled,#image-settings select:disabled{opacity:.4;cursor:default}
+@media(max-width:760px){#draw-dialog[data-mode=image] #draw-pad{width:min(100%,380px)}}

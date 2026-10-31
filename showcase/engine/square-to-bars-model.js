@@ -114,7 +114,7 @@ export function createField(extraRows=0,columns=FIELD_COLUMNS,rows=FIELD_ROWS){
   revealOrder:.82*(1-(index%columns+.5)/columns)+.14*random(Math.floor(index/columns)*97+41)+.04*random(index*79+23)
  }));
 }
-export function framePoints(field,progress,{barTurns=[0,0,0],particleElapsed=null,time=0,fieldElapsed=time,width=WIDTH,height=HEIGHT,zoom=1,panX=0,panY=0,topExtension=0,ambient=true,shocks=[],shockTime=0,form='mark',customMesh=null,columns=FIELD_COLUMNS,rows=FIELD_ROWS}={}){
+export function framePoints(field,progress,{barTurns=[0,0,0],particleElapsed=null,time=0,fieldElapsed=time,width=WIDTH,height=HEIGHT,zoom=1,panX=0,panY=0,topExtension=0,ambient=true,shocks=[],shockTime=0,form='mark',customMesh=null,customOptions={},columns=FIELD_COLUMNS,rows=FIELD_ROWS}={}){
  const relief=ease(Math.max(0,Math.min(1,progress))),fit=Math.min(width/WIDTH,height/HEIGHT);
  const cameraYaw=cameraOrbit(time,ambient),sceneScale=Math.min(width/120,height/112)*zoom;
  // the logo does not follow the camera orbit. Instead it floats a
@@ -123,7 +123,7 @@ export function framePoints(field,progress,{barTurns=[0,0,0],particleElapsed=nul
  const floatYaw=ambient?LOGO_FLOAT.sway*Math.sin(time*LOGO_FLOAT.swayRate):0;
  const floatBob=ambient?height*LOGO_FLOAT.bob*Math.sin(time*LOGO_FLOAT.bobRate+1.3):0;
  const faces=form==='mark'?lightFaces(barTurns,width,height,zoom,panX,panY+floatBob,floatYaw):[];
- const gallery=form==='mark'?null:galleryForm(form,ambient?time:0,width,height,customMesh);
+ const gallery=form==='mark'?null:galleryForm(form,ambient?time:0,width,height,customMesh,customOptions);
  const feather=Math.max(.9,Math.min(width/columns,height/rows)*.44);
  // the other objects can be switched off to look at the logo alone.
  const sparkles=sparkleFrame(time,ambient&&SHOW_SPARKLES);

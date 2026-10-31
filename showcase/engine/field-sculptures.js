@@ -123,9 +123,9 @@ export function sculptureLight(x,y,items,feather){
 }
 
 // Standalone gallery forms use the same projected-face sampler as the hero.
-export function galleryForm(form,time,width,height,customMesh=null){
+export function galleryForm(form,time,width,height,customMesh=null,options={}){
  const mesh=form==='custom'&&customMesh?customMesh:form==='orbit'?ring:form==='sphere'?sphere:cube;
- const cx=width*.51,cy=height*.51,scale=Math.min(width,height)*.34;
- const angles=form==='orbit'?[.40+Math.sin(time*.18)*.24,.55+time*.13,.18]:[.5+time*.18,.32+Math.sin(time*.13)*.12,.06];
+ const cx=width*.51,cy=height*.51,scale=Math.min(width,height)*.34*(form==='custom'?(options.scale??1):1);
+ const angles=form==='custom'?[(options.yaw??.5)+time*.18*(options.speed??1),options.tilt??.32,.06]:form==='orbit'?[.40+Math.sin(time*.18)*.24,.55+time*.13,.18]:[.5+time*.18,.32+Math.sin(time*.13)*.12,.06];
  return [{fade:1,cx,cy,depth:0,radius:scale*1.5,faces:project(mesh,cx,cy,scale,angles)}];
 }

@@ -1,4 +1,3 @@
-import {installDrawing} from './drawing.js';
 import {glyphFitScale} from './engine/grid-settings.js';
 const art=document.querySelector('#hero-art'),canvas=document.querySelector('#hero-logo');
 const motion=document.querySelector('#motion'),replay=document.querySelector('#replay'),phase=document.querySelector('#phase');
@@ -117,8 +116,21 @@ window.addEventListener('pageshow',()=>post({type:'visible',visible:!document.hi
 const skillDialog=document.querySelector('#skill-dialog');
 document.querySelector('#skill-open').addEventListener('click',()=>skillDialog.showModal());
 document.querySelector('#skill-close').addEventListener('click',()=>skillDialog.close());
-installDrawing({apply:({points,depth},select)=>{
+function applyCustom({contours,depth,options,mesh},select){
  const customButton=document.querySelector('[data-form="custom"]');customButton.hidden=false;
- post({type:'settings',outline:points,depth});
+ post({type:'settings',customMesh:mesh,customOptions:options});
  if(select)customButton.click();
-}});
+}
+// Keep image tracing and triangulation out of the first-paint module graph.
+const drawButton=document.querySelector('#draw-open');
+drawButton.onclick=async()=>{
+ const label=drawButton.innerHTML;drawButton.disabled=true;drawButton.textContent='Opening…';
+ try{const {installDrawing}=await import('./drawing.js');installDrawing({apply:applyCustom});drawButton.disabled=false;drawButton.innerHTML=label;drawButton.click();}
+ catch{drawButton.disabled=false;drawButton.innerHTML=label;const status=document.querySelector('#render-status');status.textContent='The editor could not load. Please try Draw again.';status.hidden=false;}
+};
+try{
+ const saved=JSON.parse(localStorage.getItem('glyphfield-drawing-v2')||localStorage.getItem('glyphfield-drawing-v1'));
+ if(saved)import('./engine/contour-mesh.js').then(({extrudeContours})=>{
+  const contours=saved.contours||[saved.points];applyCustom({...saved,contours,mesh:extrudeContours(contours,saved.depth)},false);
+ }).catch(()=>{});
+}catch{}

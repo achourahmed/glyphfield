@@ -4,7 +4,7 @@ Forms, drawn in light. A stationary field of tiny glyphs reveals dimensional obj
 
 [Try the showcase](https://glyphfield.ahmedachour.tech/)
 
-Native Canvas2D, ES modules, and a worker. No 3D library or runtime package dependencies. Includes dark and light themes, one-time formation, motion preferences, density controls, and a drawing tool that turns an outline into an extruded form.
+Native Canvas2D, ES modules, and a worker. No 3D library or runtime package dependencies. Includes dark and light themes, one-time formation, motion preferences, density controls, and a shape studio for sketches, presets, and image silhouettes.
 
 ## Use the skill
 
@@ -42,7 +42,14 @@ Open http://localhost:8896. The starter has no build step. Keep its JavaScript m
 python3 -m http.server 8897 --directory showcase
 ```
 
-Open http://localhost:8897. Draw a single outline, adjust its depth, and put it on the glyph screen. Drawings and display preferences stay in the browser.
+Open http://localhost:8897. Open **Draw** to use the shape studio:
+
+- Sketch freely or start from a rectangle, circle, triangle, star, ring, or arrow.
+- Edit points, insert a point by clicking an edge, delete selected points, add a hole or separate outline, and undo/redo.
+- Import or drop a PNG, JPEG, or WebP. Automatic thresholding chooses an initial brightness cut; transparency, threshold, invert, smoothing, speck cleanup, hole preservation, and largest-part controls refine the result.
+- Check the live shaded preview, then set depth, object size, rotation speed, turn, and tilt before putting it on the glyph screen.
+
+Image processing happens locally. Images up to 12 MB / 32 megapixels are sampled into a bounded preview; the extruded mesh has a 192-point budget. This produces an extruded silhouette, not a reconstruction of a photographed object's hidden surfaces. Edited outlines, object settings, and display preferences stay in the browser. Original image files are not saved or uploaded.
 
 ## Project structure
 
@@ -55,7 +62,7 @@ The starter is intentionally a smaller integration example; showcase-only contro
 
 ## Contributing
 
-Run `npm test` with Node.js 20 or newer. No dependency install is needed. After changing skill resources, run `npm run package` to refresh the downloads. Preview visual changes in both themes, at narrow and wide sizes, and with reduced motion enabled. Keep grid spacing independent of glyph size and preserve face shading through turns.
+Run `npm test` with Node.js 20 or newer. No dependency install is needed. The showcase vendors Earcut 3.0.2 for polygon triangulation. After changing skill resources, run `npm run package` to refresh the downloads. Preview visual changes in both themes, at narrow and wide sizes, and with reduced motion enabled. Keep grid spacing independent of glyph size and preserve face shading through turns.
 
 Open an issue for an idea or submit a focused pull request with a before/after screenshot for visual changes.
 
@@ -65,4 +72,4 @@ Created by [Ahmed Achour](https://ahmedachour.tech/) for [ACubic](https://acubic
 
 ## License
 
-Code and skill instructions are [MIT licensed](LICENSE). This does not grant rights to ACubic’s trademarks or imply endorsement. Replace the brand example for unrelated projects. The bundled Geist fonts use the SIL Open Font License.
+Code and skill instructions are [MIT licensed](LICENSE). This does not grant rights to ACubic’s trademarks or imply endorsement. Replace the brand example for unrelated projects. The bundled Geist fonts use the SIL Open Font License. The vendored Mapbox Earcut code uses ISC; see `showcase/engine/vendor/earcut-LICENSE.txt`.

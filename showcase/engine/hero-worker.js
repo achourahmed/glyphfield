@@ -5,7 +5,7 @@ import {timeline,INTRO_HOLD,TRANSITION} from './square-to-bars-timing.js';
 import {SHOCK_DURATION} from './field-shockwave.js';
 
 const lightColors=['#0c1b22','#142731','#232923','#10212a'];
-const state={playing:true,reduced:false,inView:true,visible:true,light:false,width:1,height:1,extend:0,topExtension:0,dpr:1,time:0,phase:null,form:'mark',customMesh:null,contrast:1,glyphScale:1,columns:236,rows:100,extraRows:0};
+const state={playing:true,reduced:false,inView:true,visible:true,light:false,width:1,height:1,extend:0,topExtension:0,dpr:1,time:0,phase:null,form:'mark',customMesh:null,customOptions:{},contrast:1,glyphScale:1,columns:236,rows:100,extraRows:0};
 let canvas=null,ctx=null,field=[],frame=0,last=0,lastDrawn=0,shocks=[],shockTime=0,draws=0,statsAt=0,hasRendered=false;
 const paths=PATHS.map(p=>new Path2D(p));
 // Some browser/low-power states can delay worker animation callbacks. Race a
@@ -35,7 +35,7 @@ function draw(now){
   const timing=timeline(state.reduced?INTRO_HOLD+TRANSITION:state.time);
   if(timing.phase!==state.phase){state.phase=timing.phase;postMessage({type:'phase',phase:timing.phase});}
   const {width,height,extend,topExtension,dpr}=state,layout=heroLayout(width-extend,height),{zoom,panY}=layout,panX=layout.panX+extend/2;
-  const marks=framePoints(field,timing.progress,{...timing,width,height,zoom,panX,panY,topExtension,ambient:!state.reduced,shocks,shockTime,form:state.form,customMesh:state.customMesh,columns:state.columns,rows:state.rows});
+  const marks=framePoints(field,timing.progress,{...timing,width,height,zoom,panX,panY,topExtension,ambient:!state.reduced,shocks,shockTime,form:state.form,customMesh:state.customMesh,customOptions:state.customOptions,columns:state.columns,rows:state.rows});
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height+topExtension);
   const light=state.light,colors=light?lightColors:COLORS;
   const fittedSize=glyphFitScale(width,height,state.columns,state.rows,state.glyphScale);
@@ -74,6 +74,11 @@ onmessage=({data:m})=>{
       if(!hasRendered&&state.visible&&state.inView){stopFrame();draw(performance.now());return;}
       break;
     case 'settings':
+      if(Array.isArray(m.customMesh)&&m.customMesh.length>0&&m.customMesh.length<=700&&m.customMesh.every(face=>Array.isArray(face.vertices)&&face.vertices.length>=3&&face.vertices.length<=4&&face.vertices.every(p=>Array.isArray(p)&&p.length===3&&p.every(v=>Number.isFinite(v)&&Math.abs(v)<4))))state.customMesh=m.customMesh;
+      if(m.customOptions){
+        const limits={scale:[.5,1.25],speed:[0,1.5],yaw:[-Math.PI,Math.PI],tilt:[-1.23,1.23]};
+        for(const [key,[min,max]] of Object.entries(limits))if(Number.isFinite(m.customOptions[key]))state.customOptions[key]=Math.max(min,Math.min(max,m.customOptions[key]));
+      }
       if(m.outline){
         try{state.customMesh=extrudeShape(m.outline,m.depth);}
         catch(error){postMessage({type:'shape-error',message:error.message});break;}

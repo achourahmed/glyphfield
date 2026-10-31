@@ -1,0 +1,11 @@
+{
+  "name": "glyphfield",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Dimensional forms drawn through a fixed field of glyphs.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "package": "python3 scripts/package.py"
+  }
+}

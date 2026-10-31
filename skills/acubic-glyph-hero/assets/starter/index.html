@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>ACubic Glyph Hero — standalone example</title><link rel="icon" href="data:,"><link rel="stylesheet" href="./hero.css"></head>
+<body>
+<header><a href="#hero-title">A Cubic</a><button id="theme" type="button">Light mode</button></header>
+<main><section class="hero" aria-labelledby="hero-title">
+ <div class="copy"><p class="eyebrow">ACubic glyph hero</p><h1 id="hero-title">Ideas<br>take shape.</h1><p>A quiet field of small shapes.<br>Depth created through light and motion.</p></div>
+ <figure id="hero-art" aria-hidden="true" data-top-extension="0">
+  <div class="fallback"><svg viewBox="0 0 109.71 107.588" fill="currentColor"><path d="M63.105 13L78.105 13L78.105 59L63.105 59ZM96.71 81.598L89.21 94.588L49.373 71.588L56.873 58.598ZM20.5 76.402L13 63.412L52.837 40.412L60.337 53.402Z"/></svg></div>
+  <canvas id="hero-logo"></canvas>
+ </figure>
+</section></main>
+<footer>Native Canvas2D · custom glyphs · adaptive light and dark</footer>
+<script type="module">
+ import {mountGlyphHero} from './hero.js';
+ mountGlyphHero(document.querySelector('#hero-art'));
+ document.querySelector('#theme').addEventListener('click',event=>{
+  const light=document.documentElement.dataset.theme!=='light';
+  document.documentElement.dataset.theme=light?'light':'dark';
+  event.currentTarget.textContent=light?'Dark mode':'Light mode';
+ });
+</script>
+</body></html>

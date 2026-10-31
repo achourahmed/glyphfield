@@ -1,0 +1,4 @@
+interface:
+  display_name: "ACubic Glyph Hero"
+  short_description: "Build shaded 3D forms from a fixed glyph field"
+  default_prompt: "Use $acubic-glyph-hero to create a lightweight hero with a softly revealed 3D form made from custom glyphs."

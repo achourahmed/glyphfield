@@ -1,7 +1,7 @@
 ---
 name: acubic-glyph-hero
 license: MIT
-description: Create or adapt animated website heroes in the ACubic glyph-field style, using a fixed grid of custom shapes and shaded projected faces to reveal rotating 3D-looking forms in native Canvas2D. Use for this visual language and its reveal, contrast, density, or motion tuning; not for unrelated page redesigns or generic 3D scenes.
+description: Build an animated 3D hero section for a landing page or website, where a logo or simple geometric form rotates and is shaded by a fixed grid of tiny glyphs (ACubic glyph-field style). Native Canvas2D in a Web Worker, no dependencies or build step, light and dark themes, reduced-motion support. Use to create this hero or tune its reveal, contrast, density, or motion; not for unrelated page redesigns or general 3D scenes.
 ---
 
 # ACubic Glyph Hero

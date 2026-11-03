@@ -2,6 +2,8 @@
 
 Forms, drawn in light. A stationary field of tiny glyphs reveals dimensional objects through changing contrast and face shading.
 
+[![Three bars formed by a fixed glyph field: the field lights up, the form appears, and the bars turn.](docs/demo.gif)](https://glyphfield.ahmedachour.tech/)
+
 [Try the showcase](https://glyphfield.ahmedachour.tech/)
 
 Native Canvas2D, ES modules, and a worker. No 3D library or runtime package dependencies. Includes dark and light themes, one-time formation, motion preferences, density controls, and a shape studio for sketches, presets, and image silhouettes.

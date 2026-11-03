@@ -1,4 +1,9 @@
-# Glyphfield
+<h1>
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="docs/brand/wordmark-dark.png">
+<img alt="Glyphfield" src="docs/brand/wordmark-light.png" height="56">
+</picture>
+</h1>
 
 Forms, drawn in light. A stationary field of tiny glyphs reveals dimensional objects through changing contrast and face shading.
 
